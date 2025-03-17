@@ -18,7 +18,7 @@ cv2.setNumThreads(0)  # Disable OpenCV threading
 NUM_WORKERS = multiprocessing.cpu_count() - 1
 # print(NUM_WORKERS)
 
-# yolo_model = YOLO('/home/sunny/CCRL_vs/ocr/datasets/runs/detect/train5/weights/best.pt')
+# yolo_model = YOLO('datasets/runs/detect/train5/weights/best.pt')
 yolo_model = YOLO('yolov8n.pt')
 yolo_model.fuse()  # Fuse Conv+BN layers for faster inference
 
