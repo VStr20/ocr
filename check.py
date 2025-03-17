@@ -31,7 +31,7 @@ NUM_WORKERS = multiprocessing.cpu_count() - 1
 # MAX_IMAGE_DIMENSION = 1500  # pixels
 
 # Load YOLOv8 segmentation model (lightweight version)
-yolo_model = YOLO('/home/sunny/CCRL_vs/ocr/datasets/runs/detect/train5/weights/best.pt')
+yolo_model = YOLO('datasets/runs/detect/train5/weights/best.pt')
 yolo_model.fuse()  # Fuse Conv+BN layers for faster inference
 # yolo_model = YOLO('yolov5nu.pt')
 yolo_model.to('cuda:7')
