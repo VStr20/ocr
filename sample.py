@@ -10,7 +10,7 @@ import time
 import os
 
 os.environ['TESSDATA_PREFIX'] = '/usr/share/tesseract-ocr/4.00/tessdata/'
-pytesseract.pytesseract.tesseract_cmd = '/usr/bin/tesseract'
+# pytesseract.pytesseract.tesseract_cmd = '/usr/bin/tesseract'
 
 def convert_pdf_to_image(pdf_path: str, dpi: int = 300) -> np.ndarray:
     """Converts the first page of a PDF to a numpy image array."""
