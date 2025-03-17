@@ -1,0 +1,151 @@
+1 Introduction
+Recurrent neural networks, long short-term memory [T3] and gated recurrent [7] neural networks.
+in particular, have been firmly established as state ofthe art approaches in sequence modeling and
+transduction problems such as language modeling and machine translation [55] B]B). Numerous
+efforts have since continued to push the boundaries of recurrent Lmguage models and encoderdecoder
+architectures (35) 24)[5}.
+Recurrent models typically factor computation along the symbol positions of the input and output
+sequences. Aligning the pasitons to steps in computation time, they generate a sequence of hidden.
+states he, as a function of the previous hidden state hy and the inpot for position f. This inherently
+sequential nature prectudes parallelization within training examples, which becomes critical at longer
+sequence lengths, as memory constraints limit batching across examples. Recent work has achieved
+significant improvements in computational efficiency through factorization tricks [ZZ] and conditional
+computation (82), while also improving model performance in case of the latter. The fundamental
+constraint of sequential computation, however, remains.
+Attention mechanisms have become an integral part of compelling sequence modeling and transduc~
+tion models in various tasks, allowing modeling of dependencies without regard to theie distance in
+the input o outpot sequences (2[09). In all but a few cases (27), however, such attention mechanisms
+are used in conjunction with a recurrent network.
+In this work we propose the Transformer, a model architecture eschewing recurrence and instead
+relying entirely on an attention mechanism to draw global dependencies between input and output.
+‘The Transformer allows for significantly more paraltelization and can reach a new state of the at in
+‘ranstation quality after being trained for as litle as twelve hours on eight P1O0 GPUs.
+2 Background
+‘The goa! of reducing sequential computation also forms the foundation ofthe Extended Neural GPU
+(1), ByteNet [18] and ConvS2S [9], all of which use convolutional neural networks as basic building
+‘block, computing hidden representations in parallel for all ingot and output positions. In hese models,
+the mumber of operations required to relate signals from two asbitrary input or output positions grows
+{in the distance between positions, linearly for ConvS2S and logarithmically for ByteNet. This makes
+it more diffcutt to learn dependencies between distant positions [13]. tn the Transformer this is
+reduced to a constant number of operations, albeit at the cost of reduced effective resolution due
+to averaging attention-weighted positions, an effect we counteract with Mutti-Head Attention as,
+described in section
+Sel-attention, sometimes called intra-attention is an attention mechanism relating different positions
+of a single sequence in order to compute a representation of the sequence. Self-attention has been.
+used successfully in a variety of tasks including reading compreltension, abstractive summarization,
+textual enfailment and learning task-independent sentence representations (2 27] 2S).
+End-to-end memory networks are based on a recurrent attention mechanism instead of sequence-
+aligned recorrence and have been shown to perform well on simple-language question answering and
+Tanguage modeling tasks A).
+To the best of our knowledge, however, the Transformer is the first transduction model relying
+entirely on sef-attention to compute representations of its input and output without using sequence-
+aligned RNNs or convolution, In the following sections, we will describe the Transformer, motivate
+selfattention and discuss its advantages over models such as [T7)[[8) and (2).
+3 Model Architecture
+‘Mast competitive neural sequence transduction models have an encoder-decoder structure (SII).
+Here, the encoder maps an input sequence of symbol representations (z1,...,22n) 10 a sequence
+of continnous representations 2 = (21,-.2q). Given 2, the decoder then generates an output
+sequence (11... Yor) of symbols one element ata time. At each step the model is auto-regressive
+10), consuming the previously generated symbots as additional input when generating the next.
+
+21 Introduction
+Recurrent neural networks, long short-term memory [T3] and gated recurrent [7] neural networks.
+in particular, have been firmly established as state ofthe art approaches in sequence modeling and
+transduction problems such as language modeling and machine translation [55] B]B). Numerous
+efforts have since continued to push the boundaries of recurrent Lmguage models and encoderdecoder
+architectures (35) 24)[5}.
+Recurrent models typically factor computation along the symbol positions of the input and output
+sequences. Aligning the pasitons to steps in computation time, they generate a sequence of hidden.
+states he, as a function of the previous hidden state hy and the inpot for position f. This inherently
+sequential nature prectudes parallelization within training examples, which becomes critical at longer
+sequence lengths, as memory constraints limit batching across examples. Recent work has achieved
+significant improvements in computational efficiency through factorization tricks [ZZ] and conditional
+computation (82), while also improving model performance in case of the latter. The fundamental
+constraint of sequential computation, however, remains.
+Attention mechanisms have become an integral part of compelling sequence modeling and transduc~
+tion models in various tasks, allowing modeling of dependencies without regard to theie distance in
+the input o outpot sequences (2[09). In all but a few cases (27), however, such attention mechanisms
+are used in conjunction with a recurrent network.
+In this work we propose the Transformer, a model architecture eschewing recurrence and instead
+relying entirely on an attention mechanism to draw global dependencies between input and output.
+‘The Transformer allows for significantly more paraltelization and can reach a new state of the at in
+‘ranstation quality after being trained for as litle as twelve hours on eight P1O0 GPUs.
+2 Background
+‘The goa! of reducing sequential computation also forms the foundation ofthe Extended Neural GPU
+(1), ByteNet [18] and ConvS2S [9], all of which use convolutional neural networks as basic building
+‘block, computing hidden representations in parallel for all ingot and output positions. In hese models,
+the mumber of operations required to relate signals from two asbitrary input or output positions grows
+{in the distance between positions, linearly for ConvS2S and logarithmically for ByteNet. This makes
+it more diffcutt to learn dependencies between distant positions [13]. tn the Transformer this is
+reduced to a constant number of operations, albeit at the cost of reduced effective resolution due
+to averaging attention-weighted positions, an effect we counteract with Mutti-Head Attention as,
+described in section
+Sel-attention, sometimes called intra-attention is an attention mechanism relating different positions
+of a single sequence in order to compute a representation of the sequence. Self-attention has been.
+used successfully in a variety of tasks including reading compreltension, abstractive summarization,
+textual enfailment and learning task-independent sentence representations (2 27] 2S).
+End-to-end memory networks are based on a recurrent attention mechanism instead of sequence-
+aligned recorrence and have been shown to perform well on simple-language question answering and
+Tanguage modeling tasks A).
+To the best of our knowledge, however, the Transformer is the first transduction model relying
+entirely on sef-attention to compute representations of its input and output without using sequence-
+aligned RNNs or convolution, In the following sections, we will describe the Transformer, motivate
+selfattention and discuss its advantages over models such as [T7)[[8) and (2).
+3 Model Architecture
+‘Mast competitive neural sequence transduction models have an encoder-decoder structure (SII).
+Here, the encoder maps an input sequence of symbol representations (z1,...,22n) 10 a sequence
+of continnous representations 2 = (21,-.2q). Given 2, the decoder then generates an output
+sequence (11... Yor) of symbols one element ata time. At each step the model is auto-regressive
+10), consuming the previously generated symbots as additional input when generating the next.
+
+21 Introduction
+Recurrent neural networks, long short-term memory [T3] and gated recurrent [7] neural networks.
+in particular, have been firmly established as state ofthe art approaches in sequence modeling and
+transduction problems such as language modeling and machine translation [55] B]B). Numerous
+efforts have since continued to push the boundaries of recurrent Lmguage models and encoderdecoder
+architectures (35) 24)[5}.
+Recurrent models typically factor computation along the symbol positions of the input and output
+sequences. Aligning the pasitons to steps in computation time, they generate a sequence of hidden.
+states he, as a function of the previous hidden state hy and the inpot for position f. This inherently
+sequential nature prectudes parallelization within training examples, which becomes critical at longer
+sequence lengths, as memory constraints limit batching across examples. Recent work has achieved
+significant improvements in computational efficiency through factorization tricks [ZZ] and conditional
+computation (82), while also improving model performance in case of the latter. The fundamental
+constraint of sequential computation, however, remains.
+Attention mechanisms have become an integral part of compelling sequence modeling and transduc~
+tion models in various tasks, allowing modeling of dependencies without regard to theie distance in
+the input o outpot sequences (2[09). In all but a few cases (27), however, such attention mechanisms
+are used in conjunction with a recurrent network.
+In this work we propose the Transformer, a model architecture eschewing recurrence and instead
+relying entirely on an attention mechanism to draw global dependencies between input and output.
+‘The Transformer allows for significantly more paraltelization and can reach a new state of the at in
+‘ranstation quality after being trained for as litle as twelve hours on eight P1O0 GPUs.
+2 Background
+‘The goa! of reducing sequential computation also forms the foundation ofthe Extended Neural GPU
+(1), ByteNet [18] and ConvS2S [9], all of which use convolutional neural networks as basic building
+‘block, computing hidden representations in parallel for all ingot and output positions. In hese models,
+the mumber of operations required to relate signals from two asbitrary input or output positions grows
+{in the distance between positions, linearly for ConvS2S and logarithmically for ByteNet. This makes
+it more diffcutt to learn dependencies between distant positions [13]. tn the Transformer this is
+reduced to a constant number of operations, albeit at the cost of reduced effective resolution due
+to averaging attention-weighted positions, an effect we counteract with Mutti-Head Attention as,
+described in section
+Sel-attention, sometimes called intra-attention is an attention mechanism relating different positions
+of a single sequence in order to compute a representation of the sequence. Self-attention has been.
+used successfully in a variety of tasks including reading compreltension, abstractive summarization,
+textual enfailment and learning task-independent sentence representations (2 27] 2S).
+End-to-end memory networks are based on a recurrent attention mechanism instead of sequence-
+aligned recorrence and have been shown to perform well on simple-language question answering and
+Tanguage modeling tasks A).
+To the best of our knowledge, however, the Transformer is the first transduction model relying
+entirely on sef-attention to compute representations of its input and output without using sequence-
+aligned RNNs or convolution, In the following sections, we will describe the Transformer, motivate
+selfattention and discuss its advantages over models such as [T7)[[8) and (2).
+3 Model Architecture
+‘Mast competitive neural sequence transduction models have an encoder-decoder structure (SII).
+Here, the encoder maps an input sequence of symbol representations (z1,...,22n) 10 a sequence
+of continnous representations 2 = (21,-.2q). Given 2, the decoder then generates an output
+sequence (11... Yor) of symbols one element ata time. At each step the model is auto-regressive
+10), consuming the previously generated symbots as additional input when generating the next.
+
+2

@@ -1,0 +1,13 @@
+numpy
+opencv-python
+pillow
+pdf2image
+ultralytics
+pytesseract
+concurrent.futures
+multiprocessing
+tqdm
+argparse
+
+sudo apt install poppler-utils
+sudo apt install tesseract-ocr

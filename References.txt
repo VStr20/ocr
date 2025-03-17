@@ -1,0 +1,6 @@
+https://appliedmachinelearning.wordpress.com/2018/06/30/performing-ocr-by-running-parallel-instances-of-tesseract-4-0-python/?utm_source=chatgpt.com
+http://www.fmwconcepts.com/imagemagick/textcleaner/index.php
+https://pyimagesearch.com/2021/11/15/tesseract-page-segmentation-modes-psms-explained-how-to-improve-your-ocr-accuracy/
+https://nanonets.com/blog/ocr-with-tesseract/
+https://github.com/tesseract-ocr/tessdata_fast/tree/main
+https://medium.com/thedeephub/from-pixels-to-words-building-a-text-recognition-system-with-yolov8-and-nlp-2-2-8c84ba458815
